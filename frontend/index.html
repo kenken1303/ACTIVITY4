@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Weather Proxy App</title>
+  <style>
+    body {
+      font-family: "Poppins", sans-serif;
+      background: linear-gradient(120deg, #89f7fe, #66a6ff);
+      color: #333;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .card {
+      background: #fff;
+      border-radius: 15px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+      padding: 30px;
+      width: 320px;
+      text-align: center;
+    }
+
+    input {
+      width: 80%;
+      padding: 10px;
+      margin-bottom: 15px;
+      border: 2px solid #66a6ff;
+      border-radius: 10px;
+      outline: none;
+      font-size: 16px;
+    }
+
+    button {
+      background: #66a6ff;
+      border: none;
+      color: white;
+      padding: 10px 20px;
+      border-radius: 10px;
+      cursor: pointer;
+      font-size: 16px;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      background: #5590e3;
+    }
+
+    .result {
+      margin-top: 20px;
+    }
+
+    .error {
+      color: red;
+      font-weight: 500;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h2>🌤 Weather Proxy App</h2>
+    <input type="text" id="city" placeholder="Enter city name..." />
+    <button onclick="getWeather()">Get Weather</button>
+
+    <div id="output" class="result"></div>
+  </div>
+
+  <script>
+    async function getWeather() {
+      const city = document.getElementById("city").value.trim();
+      const output = document.getElementById("output");
+
+      if (!city) {
+        output.innerHTML = '<p class="error">Please enter a city name.</p>';
+        return;
+      }
+
+      output.innerHTML = "Fetching weather data...";
+
+      try {
+        const res = await fetch(`http://localhost:3000/weather?city=${city}`);
+        const data = await res.json();
+
+        if (res.ok) {
+          output.innerHTML = `
+            <h3>${data.city}</h3>
+            <p>🌡 Temperature: <strong>${data.temperature} °C</strong></p>
+            <p>☁ Condition: <strong>${data.condition}</strong></p>
+          `;
+        } else {
+          output.innerHTML = `<p class="error">${data.message}</p>`;
+        }
+      } catch (err) {
+        output.innerHTML = `<p class="error">Failed to fetch weather data.</p>`;
+      }
+    }
+  </script>
+</body>
+</html>
