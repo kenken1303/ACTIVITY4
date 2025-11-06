@@ -3,11 +3,11 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Weather Proxy App</title>
+  <title>Weather API</title>
   <style>
     body {
       font-family: "Poppins", sans-serif;
-      background: linear-gradient(120deg, #89f7fe, #66a6ff);
+      background: linear-gradient(120deg, #4D4646, #F54927);
       color: #333;
       display: flex;
       flex-direction: column;
@@ -18,7 +18,7 @@
     }
 
     .card {
-      background: #fff;
+      background: #A39689;
       border-radius: 15px;
       box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
       padding: 30px;
@@ -30,14 +30,14 @@
       width: 80%;
       padding: 10px;
       margin-bottom: 15px;
-      border: 2px solid #66a6ff;
+      border: 2px solid #52402E;
       border-radius: 10px;
       outline: none;
       font-size: 16px;
     }
 
     button {
-      background: #66a6ff;
+      background: #52402E;
       border: none;
       color: white;
       padding: 10px 20px;
@@ -63,7 +63,7 @@
 </head>
 <body>
   <div class="card">
-    <h2>🌤 Weather Proxy App</h2>
+    <h2>Weather API - Activity 4</h2>
     <input type="text" id="city" placeholder="Enter city name..." />
     <button onclick="getWeather()">Get Weather</button>
 
@@ -89,8 +89,8 @@
         if (res.ok) {
           output.innerHTML = `
             <h3>${data.city}</h3>
-            <p>🌡 Temperature: <strong>${data.temperature} °C</strong></p>
-            <p>☁ Condition: <strong>${data.condition}</strong></p>
+            <p>Temperature: <strong>${data.temperature} °C</strong></p>
+            <p>Condition: <strong>${data.condition}</strong></p>
           `;
         } else {
           output.innerHTML = `<p class="error">${data.message}</p>`;
