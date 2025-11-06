@@ -12,7 +12,6 @@ export class WeatherService {
     const apiUrl = `https://api.openweathermap.org/data/2.5/weather`;
 
     try {
-      // 🌤️ Call OpenWeatherMap API
       const response: AxiosResponse<any> = await firstValueFrom(
         this.httpService.get(apiUrl, {
           params: {
